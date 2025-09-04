@@ -26,12 +26,9 @@ public class Users {
     @Column(name = "email")
     private String email;
     @Column(name = "phone")
-    private String phone;
+    private Integer phone;
     @Column(name = "address")
     private String address;
     @Column(name = "role")
     private String role;
-
-
-
 }
