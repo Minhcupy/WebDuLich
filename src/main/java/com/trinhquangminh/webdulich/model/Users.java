@@ -13,8 +13,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Users {
 
-    public static final String ROLE_ADMIN = "admin";
-    public static final String ROLE_USER = "user";
+    public static final String ROLE_ADMIN = "ADMIN";
+    public static final String ROLE_USER = "USER";
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -26,12 +26,9 @@ public class Users {
     @Column(name = "email")
     private String email;
     @Column(name = "phone")
-    private String phone;
+    private Integer phone;
     @Column(name = "address")
     private String address;
     @Column(name = "role")
     private String role;
-
-
-
 }
