@@ -22,6 +22,6 @@ public class UserCreationRequest {
     @Email(message = "EMAIL_INVALID")
     @NotBlank(message = "EMAIL_REQUIRED")
     String email;
-    Integer phone;
+    String phone;
     String address;
 }

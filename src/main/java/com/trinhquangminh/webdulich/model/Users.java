@@ -3,12 +3,14 @@ package com.trinhquangminh.webdulich.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "users")
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class Users {
@@ -26,7 +28,7 @@ public class Users {
     @Column(name = "email")
     private String email;
     @Column(name = "phone")
-    private Integer phone;
+    private String phone;
     @Column(name = "address")
     private String address;
     @Column(name = "role")
