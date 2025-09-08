@@ -17,3 +17,5 @@ spring:
         dialect: org.hibernate.dialect.MySQL8Dialect
 jwt:
   signerKey: 6S6MJ2VCGhbsMvq4XQiNEO6VF5+UtMJP3OwldQR5UoTEj9Ej6nBG/8CWvDsaIdbt
+  valid-duration: 3600 # in second
+  refreshable-duration: 36000 # in seconds
