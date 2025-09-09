@@ -20,4 +20,6 @@ public class Category {
     private String name;
     @Column(name = "description")
     private String description;
+
+    public Category(Integer id) { this.id = id; }
 }

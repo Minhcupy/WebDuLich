@@ -4,7 +4,7 @@ import com.trinhquangminh.webdulich.dto.request.UserCreationRequest;
 import com.trinhquangminh.webdulich.dto.response.UserResponse;
 import com.trinhquangminh.webdulich.exception.AppException;
 import com.trinhquangminh.webdulich.exception.ErrorCode;
-import com.trinhquangminh.webdulich.mapper.user.UserMapper;
+import com.trinhquangminh.webdulich.mapper.UserMapper;
 import com.trinhquangminh.webdulich.model.Users;
 import com.trinhquangminh.webdulich.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -40,6 +40,7 @@ public class UserService {
         return userMapper.toUserResponse(users);
     }
 
+    @PreAuthorize("hasAnyAuthority('USER','ADMIN')")
     public UserResponse getMyInfo(){
         var context = SecurityContextHolder.getContext();
         String name = context.getAuthentication().getName();

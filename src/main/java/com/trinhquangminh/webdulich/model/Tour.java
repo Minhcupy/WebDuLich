@@ -24,14 +24,18 @@ public class Tour {
     private String startDate;
     @Column(name = "end_date")
     private String endDate;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "location_id")
     private Location locationId;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "category_id")
     private Category categoryId;
     @Column(name = "image")
     private String image;
     @Column(name = "status")
     private String status;
+
+    public Tour(Integer id) {
+        this.id = id;
+    }
 }

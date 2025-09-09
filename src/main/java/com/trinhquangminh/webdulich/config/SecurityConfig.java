@@ -23,9 +23,19 @@ import java.util.List;
 @EnableMethodSecurity
 public class SecurityConfig {
 
-    private static final String[] PUBLIC_ENDPOINTS = {
-            "/users", "/auth/token", "/auth/introspect", "/auth/logout", "/auth/refresh",
-    };
+//    private static final String[] PUBLIC_ENDPOINTS = {
+//            "/users", "/auth/token", "/auth/introspect", "/auth/logout", "/auth/refresh",
+//            "/categories", "/categories/**",
+//            "/tours", "/tours/**",
+//            "/locations", "/locations/**",
+//            "/tour-details", "/tour-details/**",
+//            "/bookings", "/bookings/**",
+//            "/tickets", "/tickets/**",
+//            "/payments", "/payments/**",
+//            "/upload", "/upload/**",
+//            "/reviews", "/reviews/**",
+//            "/promotions", "/promotions/**",
+//    };
 
     private final CustomJwtDecoder customJwtDecoder;
 
@@ -38,11 +48,25 @@ public class SecurityConfig {
         httpSecurity
                 .cors(cors -> cors.configurationSource(corsConfigurationSource())) // Thêm cấu hình CORS vào đây
                 .csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(request ->
-                        request.requestMatchers(HttpMethod.POST, PUBLIC_ENDPOINTS).permitAll()
-//                                .requestMatchers(HttpMethod.GET, "/users").hasAuthority("ADMIN") // chỉ ADMIN mới được
-//                                .requestMatchers("/users/**").hasAnyAuthority("USER", "ADMIN")
-                                .anyRequest().authenticated());
+                .authorizeHttpRequests(request -> request
+                        // Public endpoints
+                        .requestMatchers(HttpMethod.POST, "/auth/**").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/users").permitAll() // đăng ký
+                        .requestMatchers(HttpMethod.GET, "/tours/**", "/locations/**", "/promotions/**").permitAll()
+
+                        // User endpoints
+                        .requestMatchers("/bookings/**", "/reviews/**").hasAnyAuthority("USER", "ADMIN")
+                        .requestMatchers("/users/my-info").hasAnyAuthority("USER", "ADMIN")
+
+                        // Admin endpoints
+                        .requestMatchers("/users/**").hasAuthority("ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/tours/**", "/categories/**", "/locations/**", "/promotions/**").hasAuthority("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/tours/**", "/categories/**", "/locations/**", "/promotions/**").hasAuthority("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/tours/**", "/categories/**", "/locations/**", "/promotions/**").hasAuthority("ADMIN")
+
+                        // Còn lại phải authenticated
+                        .anyRequest().authenticated()
+                );
 
         httpSecurity.oauth2ResourceServer(oauth2 ->
                 oauth2.jwt(jwtConfigurer -> jwtConfigurer

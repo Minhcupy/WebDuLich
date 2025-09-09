@@ -22,6 +22,9 @@ public class Location {
     @Column(name = "image")
     private String image;
     @Column(name = "main_atraction")
-    private String mainAtraction;
+    private String mainAttraction;
 
+    public Location(Integer id) {
+        this.id = id;
+    }
 }
