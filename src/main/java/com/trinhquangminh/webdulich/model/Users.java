@@ -3,18 +3,20 @@ package com.trinhquangminh.webdulich.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "users")
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class Users {
 
-    public static final String ROLE_ADMIN = "admin";
-    public static final String ROLE_USER = "user";
+    public static final String ROLE_ADMIN = "ADMIN";
+    public static final String ROLE_USER = "USER";
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -31,7 +33,4 @@ public class Users {
     private String address;
     @Column(name = "role")
     private String role;
-
-
-
 }

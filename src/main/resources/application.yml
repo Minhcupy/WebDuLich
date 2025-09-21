@@ -15,3 +15,13 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL8Dialect
+jwt:
+  signerKey: 6S6MJ2VCGhbsMvq4XQiNEO6VF5+UtMJP3OwldQR5UoTEj9Ej6nBG/8CWvDsaIdbt
+  valid-duration: 3600 # in second
+  refreshable-duration: 36000 # in seconds
+
+vnpay:
+  tmnCode: VAYSWDS8
+  secretKey: TELHZGDROWAOPX2NGJAICLFCU147OZL6
+  payUrl: https://sandbox.vnpayment.vn/paymentv2/vpcpay.html
+  returnUrl: http://localhost:8080/payments/vnpay-return
